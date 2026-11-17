@@ -11,19 +11,19 @@ document.addEventListener('DOMContentLoaded', function () {
   const desktopTopBtn = document.getElementById('desktopBackToTop');
   const mobileTopBtn = document.getElementById('mobileScrollTopBtn');
 
-  window.addEventListener('scroll', function () {
+  function handleScroll() {
     const scrollY = window.scrollY;
 
-    // Sticky header
+    // Sticky Header
     if (header) {
-      if (scrollY > 70) {
+      if (scrollY > 60) {
         header.classList.add('is-sticky');
       } else {
         header.classList.remove('is-sticky');
       }
     }
 
-    // Desktop back-to-top button
+    // Desktop Back To Top
     if (desktopTopBtn) {
       if (scrollY > 300) {
         desktopTopBtn.classList.add('show');
@@ -31,7 +31,10 @@ document.addEventListener('DOMContentLoaded', function () {
         desktopTopBtn.classList.remove('show');
       }
     }
-  }, { passive: true });
+  }
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll(); // Initial check
 
   function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -40,11 +43,56 @@ document.addEventListener('DOMContentLoaded', function () {
   if (desktopTopBtn) desktopTopBtn.addEventListener('click', scrollToTop);
   if (mobileTopBtn) mobileTopBtn.addEventListener('click', scrollToTop);
 
-  // 2. Mobile Drawer Navigation & Accordion Submenus
-  const mobileToggle = document.getElementById('mobileMenuToggle') || document.querySelector('.mobile-toggle-btn');
-  const mobileDrawer = document.getElementById('mobileNavDrawer') || document.querySelector('.mobile-nav-drawer');
-  const drawerOverlay = document.getElementById('mobileDrawerOverlay') || document.querySelector('.mobile-drawer-overlay');
-  const closeDrawerBtn = document.getElementById('mobileDrawerClose') || document.querySelector('.mobile-drawer-close');
+  // 2. Desktop Dropdown Behavior (Hover, Click, Keyboard)
+  const navDropdownItems = document.querySelectorAll('.nav-item.has-dropdown');
+  navDropdownItems.forEach(item => {
+    const trigger = item.querySelector('.nav-link');
+    if (trigger) {
+      trigger.addEventListener('click', function (e) {
+        // Toggle on click
+        e.preventDefault();
+        const isOpen = item.classList.contains('dropdown-open');
+        navDropdownItems.forEach(other => {
+          other.classList.remove('dropdown-open');
+          const t = other.querySelector('.nav-link');
+          if (t) t.setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('dropdown-open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
+    }
+  });
+
+  // Close dropdown on click outside or Escape
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.nav-item.has-dropdown')) {
+      navDropdownItems.forEach(item => {
+        item.classList.remove('dropdown-open');
+        const trigger = item.querySelector('.nav-link');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      navDropdownItems.forEach(item => {
+        item.classList.remove('dropdown-open');
+        const trigger = item.querySelector('.nav-link');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+      });
+      closeDrawer();
+      closeModal();
+    }
+  });
+
+  // 3. Mobile Navigation Drawer (Slides from Right)
+  const mobileToggle = document.getElementById('mobileMenuOpenBtn');
+  const mobileDrawer = document.getElementById('mobileNavDrawer');
+  const drawerOverlay = document.getElementById('mobileDrawerOverlay');
+  const closeDrawerBtn = document.getElementById('mobileDrawerClose');
 
   function openDrawer() {
     if (mobileDrawer) mobileDrawer.classList.add('active');
@@ -62,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (closeDrawerBtn) closeDrawerBtn.addEventListener('click', closeDrawer);
   if (drawerOverlay) drawerOverlay.addEventListener('click', closeDrawer);
 
-  // Accordion submenus in mobile drawer
+  // Accordion submenus inside Mobile Drawer
   const accordionButtons = document.querySelectorAll('.mobile-accordion-btn');
   accordionButtons.forEach(btn => {
     btn.addEventListener('click', function (e) {
@@ -75,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // 3. Hero Carousel Slider
+  // 4. Hero Carousel Slider
   const slides = document.querySelectorAll('.hero-slide');
   const dots = document.querySelectorAll('.slider-dot');
   const prevBtn = document.querySelector('.slider-arrow.prev');
@@ -103,180 +151,95 @@ document.addEventListener('DOMContentLoaded', function () {
       goToSlide(currentSlide - 1);
     }
 
-    if (nextBtn) nextBtn.addEventListener('click', () => {
-      nextSlide();
-      resetInterval();
-    });
-
-    if (prevBtn) prevBtn.addEventListener('click', () => {
-      prevSlide();
-      resetInterval();
-    });
-
-    dots.forEach((dot, idx) => {
-      dot.addEventListener('click', () => {
-        goToSlide(idx);
-        resetInterval();
-      });
-    });
-
-    function startInterval() {
+    function startAutoplay() {
+      if (slideInterval) clearInterval(slideInterval);
       slideInterval = setInterval(nextSlide, 6000);
     }
 
-    function resetInterval() {
-      clearInterval(slideInterval);
-      startInterval();
+    function pauseAutoplay() {
+      if (slideInterval) clearInterval(slideInterval);
     }
 
-    startInterval();
-  }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function () {
+        nextSlide();
+        startAutoplay();
+      });
+    }
 
-  // 4. Project Filter Tabs
-  const filterButtons = document.querySelectorAll('.filter-btn');
-  const projectCards = document.querySelectorAll('.project-card');
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function () {
+        prevSlide();
+        startAutoplay();
+      });
+    }
 
-  if (filterButtons.length > 0 && projectCards.length > 0) {
-    filterButtons.forEach(btn => {
-      btn.addEventListener('click', function () {
-        filterButtons.forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-
-        const filterValue = this.getAttribute('data-filter');
-
-        projectCards.forEach(card => {
-          if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
-            card.style.display = 'block';
-            setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'scale(1)'; }, 10);
-          } else {
-            card.style.opacity = '0';
-            card.style.transform = 'scale(0.95)';
-            setTimeout(() => { card.style.display = 'none'; }, 250);
-          }
-        });
+    dots.forEach((dot, idx) => {
+      dot.addEventListener('click', function () {
+        goToSlide(idx);
+        startAutoplay();
       });
     });
+
+    const heroSection = document.querySelector('.hero-v2-section');
+    if (heroSection) {
+      heroSection.addEventListener('mouseenter', pauseAutoplay);
+      heroSection.addEventListener('mouseleave', startAutoplay);
+    }
+
+    startAutoplay();
   }
 
-  // 5. Lightbox Modal for Project & Gallery Images
-  const modalOverlay = document.getElementById('imageModalOverlay');
-  const modalImg = document.getElementById('modalPreviewImage');
-  const modalCaption = document.getElementById('modalCaptionText');
-  const modalClose = document.getElementById('modalCloseButton');
+  // 5. Quote Modal Popup
+  const quoteModal = document.getElementById('quoteModal');
+  const openQuoteBtns = document.querySelectorAll('.open-quote-modal');
+  const closeQuoteBtn = document.getElementById('closeQuoteModal');
 
-  function openImageModal(imgSrc, caption) {
-    if (!modalOverlay) return;
-    if (modalImg) modalImg.src = imgSrc;
-    if (modalCaption) modalCaption.textContent = caption || '';
-    modalOverlay.classList.add('active');
+  function openModal(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    if (quoteModal) quoteModal.classList.add('active');
     document.body.style.overflow = 'hidden';
+    closeDrawer();
   }
 
-  function closeImageModal() {
-    if (!modalOverlay) return;
-    modalOverlay.classList.remove('active');
+  function closeModal() {
+    if (quoteModal) quoteModal.classList.remove('active');
     document.body.style.overflow = '';
   }
 
-  if (modalClose) modalClose.addEventListener('click', closeImageModal);
-  if (modalOverlay) {
-    modalOverlay.addEventListener('click', function (e) {
-      if (e.target === modalOverlay) closeImageModal();
-    });
-  }
-
-  document.querySelectorAll('.open-lightbox').forEach(el => {
-    el.addEventListener('click', function (e) {
-      e.preventDefault();
-      const imgSrc = this.getAttribute('data-img') || this.getAttribute('href');
-      const caption = this.getAttribute('data-caption') || this.getAttribute('title');
-      openImageModal(imgSrc, caption);
-    });
+  openQuoteBtns.forEach(btn => {
+    btn.addEventListener('click', openModal);
   });
 
-  // 6. Quote Request Modal
-  const quoteModal = document.getElementById('quoteModal');
-  const openQuoteButtons = document.querySelectorAll('.open-quote-modal');
-  const closeQuoteButton = document.getElementById('closeQuoteModal');
+  if (closeQuoteBtn) closeQuoteBtn.addEventListener('click', closeModal);
 
-  function openQuote() {
-    if (quoteModal) {
-      quoteModal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-  }
-
-  function closeQuote() {
-    if (quoteModal) {
-      quoteModal.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-  }
-
-  openQuoteButtons.forEach(btn => btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    openQuote();
-  }));
-
-  if (closeQuoteButton) closeQuoteButton.addEventListener('click', closeQuote);
   if (quoteModal) {
     quoteModal.addEventListener('click', function (e) {
-      if (e.target === quoteModal) closeQuote();
+      if (e.target === quoteModal) closeModal();
     });
   }
 
-  // 7. Toast Notification Utility
-  function showToast(message, isSuccess = true) {
-    let toast = document.querySelector('.toast-notice');
-    if (!toast) {
-      toast = document.createElement('div');
-      toast.className = 'toast-notice';
-      document.body.appendChild(toast);
-    }
-    toast.innerHTML = `<i class="fas ${isSuccess ? 'fa-check-circle' : 'fa-exclamation-circle'}" style="color:${isSuccess ? '#10B981' : '#EF4444'}; font-size:1.4rem;"></i> <span>${message}</span>`;
-    toast.classList.add('show');
+  // 6. Form Submission Handling with Toast Notice
+  const quoteForms = document.querySelectorAll('.quote-form');
+  const toast = document.querySelector('.toast-notice');
 
+  function showToast(msg, isSuccess = true) {
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.style.background = isSuccess ? '#10253D' : '#DC2626';
+    toast.style.color = '#FFFFFF';
+    toast.classList.add('show');
     setTimeout(() => {
       toast.classList.remove('show');
-    }, 4500);
+    }, 4000);
   }
 
-  // 8. Quote Form Submissions
-  const quoteForms = document.querySelectorAll('.quote-form');
   quoteForms.forEach(form => {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      const nameInput = form.querySelector('input[name="fullname"]');
-      const phoneInput = form.querySelector('input[name="phone"]');
-
-      if (!nameInput || !nameInput.value.trim()) {
-        showToast('Vui lòng nhập họ và tên của Quý khách.', false);
-        return;
-      }
-      if (!phoneInput || !phoneInput.value.trim() || phoneInput.value.trim().length < 8) {
-        showToast('Vui lòng nhập số điện thoại hợp lệ để nhận báo giá.', false);
-        return;
-      }
-
-      // Simulate sending
-      const submitBtn = form.querySelector('button[type="submit"]');
-      const originalText = submitBtn ? submitBtn.innerHTML : '';
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang xử lý...';
-      }
-
-      setTimeout(() => {
-        showToast('Cảm ơn Quý khách! Trịnh Phú Gia đã tiếp nhận thông tin và sẽ liên hệ tư vấn trong 15 phút.');
-        form.reset();
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = originalText;
-        }
-        closeQuote();
-      }, 800);
+      showToast('Cảm ơn bạn! Yêu cầu báo giá đã được gửi thành công. Trịnh Phú Gia sẽ liên hệ trong ít phút.');
+      form.reset();
+      closeModal();
     });
   });
-
 });
-

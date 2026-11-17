@@ -53,7 +53,7 @@
 </head>
 <body>
 
-    <!-- ================= TOPBAR (38PX NAVY #0B1D31) ================= -->
+      <!-- ================= TOPBAR (38PX NAVY #10253D) ================= -->
   <div class="topbar">
     <div class="container">
       <div class="topbar-left">
@@ -61,110 +61,196 @@
           <i class="fas fa-map-marker-alt"></i>
           <span>Tòa nhà 4C Minh Khai, Đ. Nguyễn Thị Minh Khai, TP. Bắc Giang</span>
         </div>
+        <span class="topbar-divider">|</span>
         <div class="topbar-item">
           <i class="fas fa-envelope"></i>
           <a href="mailto:trinhphugia.xd@gmail.com">trinhphugia.xd@gmail.com</a>
         </div>
       </div>
       <div class="topbar-right">
-        <div class="topbar-item topbar-hotline">
+        <div class="topbar-item">
           <i class="fas fa-phone-alt"></i>
-          <span class="hotline-label">Hotline:</span>
-          <a href="tel:0898716999" class="hotline-num">0898 716 999</a>
-          <span class="hotline-sep">·</span>
-          <a href="tel:0898414898" class="hotline-num">0898 414 898</a>
+          <span>Hotline: <a href="tel:0898716999" class="topbar-link-bold">0898 716 999</a></span>
         </div>
-        <div class="topbar-badge">
-          MST: 2400916665
+        <span class="topbar-divider">|</span>
+        <div class="topbar-item">
+          <i class="fas fa-id-card"></i>
+          <span>MST: 2400916665</span>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ================= MAIN HEADER (82PX PREMIUM LIGHT INDUSTRIAL) ================= -->
+  <!-- ================= MAIN HEADER (82PX DEFAULT / 70PX STICKY) ================= -->
   <header class="header-main" id="headerMain">
     <div class="container">
-      <nav class="navbar">
-        <!-- Brand Logo -->
-        <a href="index.html" class="logo-brand" title="Trịnh Phú Gia — Giải Pháp Bề Mặt Sàn Công Nghiệp">
+      <nav class="navbar" role="navigation" aria-label="Main Navigation">
+        <!-- Desktop Logo (Left) -->
+        <a href="index.html" class="logo-brand" title="Trịnh Phú Gia — Giải Pháp Sàn Công Nghiệp">
           <img src="assets/images/logo.png" alt="Công ty Cổ phần Xây dựng Trịnh Phú Gia">
         </a>
 
-        <!-- Desktop Navigation (Centered) -->
-        <ul class="nav-menu">
+        <!-- Mobile Hamburger Button (Left on Mobile) -->
+        <button class="mobile-hamburger-btn" id="mobileMenuOpenBtn" aria-label="Mở menu điều hướng">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+
+        <!-- Mobile Center Logo (Center on Mobile) -->
+        <a href="index.html" class="mobile-center-logo" title="Trịnh Phú Gia">
+          <img src="assets/images/logo.png" alt="Trịnh Phú Gia Logo">
+        </a>
+
+        <!-- Desktop Navigation Menu (Center) -->
+        <ul class="nav-menu" role="menubar">
           <li class="nav-item active">
-            <a href="index.html" class="nav-link">Trang chủ</a>
+            <a href="index.html" class="nav-link" aria-current="page">Trang chủ</a>
           </li>
-          <li class="nav-item ">
-            <a href="gioi-thieu.html" class="nav-link">
+          <li class="nav-item has-dropdown ">
+            <a href="gioi-thieu.html" class="nav-link has-dropdown" aria-haspopup="true" aria-expanded="false" >
               Giới thiệu <i class="fas fa-chevron-down nav-arrow"></i>
             </a>
-            <ul class="dropdown-menu">
-              <li><a href="gioi-thieu.html#thu-ngo" class="dropdown-link"><i class="fas fa-file-alt"></i> Thư ngỏ Ban Giám Đốc</a></li>
-              <li><a href="gioi-thieu.html#lich-su" class="dropdown-link"><i class="fas fa-history"></i> Lịch sử hình thành & phát triển</a></li>
-              <li><a href="gioi-thieu.html#tam-nhin" class="dropdown-link"><i class="fas fa-bullseye"></i> Tầm nhìn, Sứ mệnh & Giá trị</a></li>
-              <li><a href="gioi-thieu.html#so-do" class="dropdown-link"><i class="fas fa-sitemap"></i> Sơ đồ tổ chức công ty</a></li>
-              <li><a href="gioi-thieu.html#nhan-su" class="dropdown-link"><i class="fas fa-users-cog"></i> Năng lực nhân sự & lãnh đạo</a></li>
-              <li><a href="ho-so-nang-luc.html" class="dropdown-link"><i class="fas fa-file-pdf"></i> Tải Hồ sơ năng lực (PDF)</a></li>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="gioi-thieu.html#thu-ngo" class="dropdown-link" role="menuitem">
+                  <span class="dropdown-link-left"><i class="fas fa-file-alt"></i> Thư ngỏ Ban Giám Đốc</span>
+                  <i class="fas fa-angle-right dropdown-link-arrow"></i>
+                </a>
+              </li>
+              <li>
+                <a href="gioi-thieu.html#lich-su" class="dropdown-link" role="menuitem">
+                  <span class="dropdown-link-left"><i class="fas fa-history"></i> Lịch sử hình thành & phát triển</span>
+                  <i class="fas fa-angle-right dropdown-link-arrow"></i>
+                </a>
+              </li>
+              <li>
+                <a href="gioi-thieu.html#tam-nhin" class="dropdown-link" role="menuitem">
+                  <span class="dropdown-link-left"><i class="fas fa-bullseye"></i> Tầm nhìn, Sứ mệnh & Giá trị</span>
+                  <i class="fas fa-angle-right dropdown-link-arrow"></i>
+                </a>
+              </li>
+              <li>
+                <a href="gioi-thieu.html#so-do" class="dropdown-link" role="menuitem">
+                  <span class="dropdown-link-left"><i class="fas fa-sitemap"></i> Sơ đồ tổ chức công ty</span>
+                  <i class="fas fa-angle-right dropdown-link-arrow"></i>
+                </a>
+              </li>
+              <li>
+                <a href="gioi-thieu.html#nhan-su" class="dropdown-link" role="menuitem">
+                  <span class="dropdown-link-left"><i class="fas fa-users-cog"></i> Năng lực nhân sự & lãnh đạo</span>
+                  <i class="fas fa-angle-right dropdown-link-arrow"></i>
+                </a>
+              </li>
+              <li>
+                <a href="ho-so-nang-luc.html" class="dropdown-link" role="menuitem">
+                  <span class="dropdown-link-left"><i class="fas fa-file-pdf"></i> Tải Hồ sơ năng lực (PDF)</span>
+                  <i class="fas fa-angle-right dropdown-link-arrow"></i>
+                </a>
+              </li>
             </ul>
           </li>
-          <li class="nav-item ">
-            <a href="dich-vu.html" class="nav-link">
+          <li class="nav-item has-dropdown ">
+            <a href="dich-vu.html" class="nav-link has-dropdown" aria-haspopup="true" aria-expanded="false" >
               Dịch vụ <i class="fas fa-chevron-down nav-arrow"></i>
             </a>
-            <ul class="dropdown-menu dropdown-menu-wide">
-              <li><a href="dich-vu/thi-cong-son-san-epoxy.html" class="dropdown-link"><i class="fas fa-paint-roller"></i> Thi công sơn sàn Epoxy</a></li>
-              <li><a href="dich-vu/mai-tang-cung-danh-bong-san-be-tong.html" class="dropdown-link"><i class="fas fa-gem"></i> Mài tăng cứng & Đánh bóng bê tông</a></li>
-              <li><a href="dich-vu/thi-cong-san-nhua-vinyl-chong-tinh-dien.html" class="dropdown-link"><i class="fas fa-bolt"></i> Sàn nhựa Vinyl chống tĩnh điện</a></li>
-              <li><a href="dich-vu/thi-cong-son-deo-nhiet.html" class="dropdown-link"><i class="fas fa-road"></i> Thi công sơn dẻo nhiệt giao thông</a></li>
-              <li><a href="dich-vu/thi-cong-san-the-thao.html" class="dropdown-link"><i class="fas fa-basketball-ball"></i> Thi công sân thể thao đa năng</a></li>
-              <li><a href="dich-vu/ve-sinh-cong-nghiep.html" class="dropdown-link"><i class="fas fa-broom"></i> Dịch vụ vệ sinh công nghiệp</a></li>
-              <li><a href="dich-vu/cung-cap-dich-vu-tap-vu.html" class="dropdown-link"><i class="fas fa-hands-helping"></i> Cung cấp dịch vụ tạp vụ</a></li>
-              <li><a href="dich-vu/cham-soc-canh-quan.html" class="dropdown-link"><i class="fas fa-seedling"></i> Chăm sóc cảnh quan cây xanh</a></li>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="dich-vu/thi-cong-son-san-epoxy.html" class="dropdown-link" role="menuitem">
+                  <span class="dropdown-link-left"><i class="fas fa-paint-roller"></i> Thi công sơn sàn Epoxy</span>
+                  <i class="fas fa-angle-right dropdown-link-arrow"></i>
+                </a>
+              </li>
+              <li>
+                <a href="dich-vu/mai-tang-cung-danh-bong-san-be-tong.html" class="dropdown-link" role="menuitem">
+                  <span class="dropdown-link-left"><i class="fas fa-gem"></i> Mài tăng cứng & Đánh bóng bê tông</span>
+                  <i class="fas fa-angle-right dropdown-link-arrow"></i>
+                </a>
+              </li>
+              <li>
+                <a href="dich-vu/thi-cong-san-nhua-vinyl-chong-tinh-dien.html" class="dropdown-link" role="menuitem">
+                  <span class="dropdown-link-left"><i class="fas fa-bolt"></i> Sàn nhựa Vinyl chống tĩnh điện</span>
+                  <i class="fas fa-angle-right dropdown-link-arrow"></i>
+                </a>
+              </li>
+              <li>
+                <a href="dich-vu/thi-cong-son-deo-nhiet.html" class="dropdown-link" role="menuitem">
+                  <span class="dropdown-link-left"><i class="fas fa-road"></i> Thi công sơn dẻo nhiệt giao thông</span>
+                  <i class="fas fa-angle-right dropdown-link-arrow"></i>
+                </a>
+              </li>
+              <li>
+                <a href="dich-vu/thi-cong-san-the-thao.html" class="dropdown-link" role="menuitem">
+                  <span class="dropdown-link-left"><i class="fas fa-basketball-ball"></i> Thi công sân thể thao đa năng</span>
+                  <i class="fas fa-angle-right dropdown-link-arrow"></i>
+                </a>
+              </li>
+              <li>
+                <a href="dich-vu/ve-sinh-cong-nghiep.html" class="dropdown-link" role="menuitem">
+                  <span class="dropdown-link-left"><i class="fas fa-broom"></i> Dịch vụ vệ sinh công nghiệp</span>
+                  <i class="fas fa-angle-right dropdown-link-arrow"></i>
+                </a>
+              </li>
+              <li>
+                <a href="dich-vu/cung-cap-dich-vu-tap-vu.html" class="dropdown-link" role="menuitem">
+                  <span class="dropdown-link-left"><i class="fas fa-hands-helping"></i> Cung cấp dịch vụ tạp vụ</span>
+                  <i class="fas fa-angle-right dropdown-link-arrow"></i>
+                </a>
+              </li>
+              <li>
+                <a href="dich-vu/cham-soc-canh-quan.html" class="dropdown-link" role="menuitem">
+                  <span class="dropdown-link-left"><i class="fas fa-seedling"></i> Chăm sóc cảnh quan cây xanh</span>
+                  <i class="fas fa-angle-right dropdown-link-arrow"></i>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item ">
-            <a href="du-an.html" class="nav-link">Dự án tiêu biểu</a>
+            <a href="du-an.html" class="nav-link" >Dự án tiêu biểu</a>
           </li>
           <li class="nav-item ">
-            <a href="nang-luc-thiet-bi.html" class="nav-link">Thiết bị & Năng lực</a>
+            <a href="nang-luc-thiet-bi.html" class="nav-link" >Thiết bị & Năng lực</a>
           </li>
           <li class="nav-item ">
-            <a href="thu-vien.html" class="nav-link">Thư viện ảnh</a>
+            <a href="thu-vien.html" class="nav-link" >Thư viện ảnh</a>
           </li>
           <li class="nav-item ">
-            <a href="tin-tuc.html" class="nav-link">Tin tức</a>
+            <a href="tin-tuc.html" class="nav-link" >Tin tức</a>
           </li>
           <li class="nav-item ">
-            <a href="lien-he.html" class="nav-link">Liên hệ</a>
+            <a href="lien-he.html" class="nav-link" >Liên hệ</a>
           </li>
         </ul>
 
-        <!-- Right Side Actions -->
+        <!-- Right Side: Desktop CTA + Mobile Quick Actions -->
         <div class="header-action">
-          <a href="lien-he.html" class="header-cta-btn open-quote-modal" title="Nhận báo giá dự án nhanh chóng">
+          <!-- Desktop CTA -->
+          <a href="lien-he.html" class="header-cta-btn open-quote-modal" title="Yêu cầu báo giá thi công">
+            <i class="fas fa-file-invoice"></i>
             <span>Yêu cầu báo giá</span>
-            <i class="fas fa-arrow-right"></i>
           </a>
 
-          <!-- Mobile Quick Call Pill -->
-          <a href="tel:0898716999" class="mobile-header-call" title="Gọi hotline">
+          <!-- Mobile Default: Big Call Button -->
+          <a href="tel:0898716999" class="mobile-call-btn-large" title="Gọi hotline: 0898 716 999">
             <i class="fas fa-phone-alt"></i>
             <span>Gọi ngay</span>
           </a>
 
-          <!-- Hamburger Button -->
-          <button class="mobile-toggle-btn" aria-label="Mở Menu điều hướng" id="mobileMenuToggle">
-            <span class="hamburger-bar"></span>
-            <span class="hamburger-bar"></span>
-            <span class="hamburger-bar"></span>
-          </button>
+          <!-- Mobile Sticky: Two Compact Buttons -->
+          <div class="mobile-sticky-actions">
+            <a href="tel:0898716999" class="mobile-btn-circle-phone" title="Gọi hotline" aria-label="Gọi hotline">
+              <i class="fas fa-phone-alt"></i>
+            </a>
+            <a href="lien-he.html" class="mobile-btn-circle-quote open-quote-modal" title="Báo giá" aria-label="Yêu cầu báo giá">
+              <i class="fas fa-file-invoice"></i>
+            </a>
+          </div>
         </div>
       </nav>
     </div>
   </header>
 
-  <!-- ================= MOBILE NAVIGATION DRAWER ================= -->
+  <!-- ================= MOBILE MENU DRAWER (SLIDES FROM RIGHT) ================= -->
   <div class="mobile-drawer-overlay" id="mobileDrawerOverlay"></div>
   <aside class="mobile-nav-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation">
     <div class="mobile-drawer-header">
@@ -207,21 +293,21 @@
           <div class="mobile-sub-toggle">
             <a href="dich-vu.html" class="mobile-nav-link ">
               <i class="fas fa-layer-group mobile-nav-icon"></i>
-              <span>Dịch vụ thi công</span>
+              <span>Dịch vụ</span>
             </a>
             <button class="mobile-accordion-btn" aria-label="Mở rộng mục Dịch vụ">
               <i class="fas fa-chevron-down"></i>
             </button>
           </div>
           <div class="mobile-sub-menu">
-            <a href="dich-vu/thi-cong-son-san-epoxy.html"><i class="fas fa-angle-right"></i> Sơn sàn Epoxy</a>
-            <a href="dich-vu/mai-tang-cung-danh-bong-san-be-tong.html"><i class="fas fa-angle-right"></i> Mài tăng cứng bê tông</a>
-            <a href="dich-vu/thi-cong-san-nhua-vinyl-chong-tinh-dien.html"><i class="fas fa-angle-right"></i> Sàn Vinyl chống tĩnh điện</a>
-            <a href="dich-vu/thi-cong-son-deo-nhiet.html"><i class="fas fa-angle-right"></i> Sơn dẻo nhiệt giao thông</a>
-            <a href="dich-vu/thi-cong-san-the-thao.html"><i class="fas fa-angle-right"></i> Sân thể thao đa năng</a>
-            <a href="dich-vu/ve-sinh-cong-nghiep.html"><i class="fas fa-angle-right"></i> Vệ sinh công nghiệp</a>
-            <a href="dich-vu/cung-cap-dich-vu-tap-vu.html"><i class="fas fa-angle-right"></i> Cung cấp tạp vụ</a>
-            <a href="dich-vu/cham-soc-canh-quan.html"><i class="fas fa-angle-right"></i> Chăm sóc cảnh quan</a>
+            <a href="dich-vu/thi-cong-son-san-epoxy.html"><i class="fas fa-angle-right"></i> Thi công sơn sàn Epoxy</a>
+            <a href="dich-vu/mai-tang-cung-danh-bong-san-be-tong.html"><i class="fas fa-angle-right"></i> Mài tăng cứng & đánh bóng bê tông</a>
+            <a href="dich-vu/thi-cong-san-nhua-vinyl-chong-tinh-dien.html"><i class="fas fa-angle-right"></i> Sàn nhựa Vinyl chống tĩnh điện</a>
+            <a href="dich-vu/thi-cong-son-deo-nhiet.html"><i class="fas fa-angle-right"></i> Thi công sơn dẻo nhiệt giao thông</a>
+            <a href="dich-vu/thi-cong-san-the-thao.html"><i class="fas fa-angle-right"></i> Thi công sân thể thao đa năng</a>
+            <a href="dich-vu/ve-sinh-cong-nghiep.html"><i class="fas fa-angle-right"></i> Dịch vụ vệ sinh công nghiệp</a>
+            <a href="dich-vu/cung-cap-dich-vu-tap-vu.html"><i class="fas fa-angle-right"></i> Cung cấp dịch vụ tạp vụ</a>
+            <a href="dich-vu/cham-soc-canh-quan.html"><i class="fas fa-angle-right"></i> Chăm sóc cảnh quan cây xanh</a>
           </div>
         </li>
         <li>
@@ -245,39 +331,33 @@
         <li>
           <a href="tin-tuc.html" class="mobile-nav-link ">
             <i class="fas fa-newspaper mobile-nav-icon"></i>
-            <span>Tin tức & Cẩm nang</span>
+            <span>Tin tức</span>
           </a>
         </li>
         <li>
           <a href="lien-he.html" class="mobile-nav-link ">
-            <i class="fas fa-envelope-open-text mobile-nav-icon"></i>
-            <span>Liên hệ báo giá</span>
+            <i class="fas fa-envelope mobile-nav-icon"></i>
+            <span>Liên hệ</span>
           </a>
         </li>
       </ul>
 
       <!-- Drawer Footer with Contacts & Actions -->
       <div class="mobile-drawer-footer">
-        <a href="lien-he.html" class="btn-drawer-cta open-quote-modal">
-          <i class="fas fa-file-signature"></i>
-          <span>Yêu cầu báo giá thi công</span>
-        </a>
         <div class="drawer-contact-card">
           <div class="drawer-contact-line">
             <i class="fas fa-phone-alt"></i>
-            <div>
-              <span class="d-label">Hotline tư vấn kỹ thuật</span>
-              <a href="tel:0898716999" class="d-val">0898 716 999</a> · <a href="tel:0898414898" class="d-val">0898 414 898</a>
-            </div>
+            <span>Hotline: <a href="tel:0898716999">0898 716 999</a></span>
           </div>
           <div class="drawer-contact-line">
             <i class="fas fa-envelope"></i>
-            <div>
-              <span class="d-label">Email hỗ trợ 24/7</span>
-              <a href="mailto:trinhphugia.xd@gmail.com" class="d-val">trinhphugia.xd@gmail.com</a>
-            </div>
+            <a href="mailto:trinhphugia.xd@gmail.com">trinhphugia.xd@gmail.com</a>
           </div>
         </div>
+        <a href="lien-he.html" class="btn-drawer-cta open-quote-modal">
+          <i class="fas fa-file-invoice"></i>
+          <span>Yêu cầu báo giá</span>
+        </a>
       </div>
     </div>
   </aside>
