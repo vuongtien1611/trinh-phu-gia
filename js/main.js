@@ -6,31 +6,45 @@
 document.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
-  // 1. Sticky Header
+  // 1. Sticky Header & Scroll To Top Behavior
   const header = document.querySelector('.header-main');
-  const backToTopBtn = document.querySelector('.back-to-top');
+  const desktopTopBtn = document.getElementById('desktopBackToTop');
+  const mobileTopBtn = document.getElementById('mobileScrollTopBtn');
 
   window.addEventListener('scroll', function () {
-    if (window.scrollY > 80) {
-      if (header) header.classList.add('is-sticky');
-      if (backToTopBtn) backToTopBtn.classList.add('show');
-    } else {
-      if (header) header.classList.remove('is-sticky');
-      if (backToTopBtn) backToTopBtn.classList.remove('show');
-    }
-  });
+    const scrollY = window.scrollY;
 
-  if (backToTopBtn) {
-    backToTopBtn.addEventListener('click', function () {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    // Sticky header
+    if (header) {
+      if (scrollY > 70) {
+        header.classList.add('is-sticky');
+      } else {
+        header.classList.remove('is-sticky');
+      }
+    }
+
+    // Desktop back-to-top button
+    if (desktopTopBtn) {
+      if (scrollY > 300) {
+        desktopTopBtn.classList.add('show');
+      } else {
+        desktopTopBtn.classList.remove('show');
+      }
+    }
+  }, { passive: true });
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // 2. Mobile Drawer Navigation
-  const mobileToggle = document.querySelector('.mobile-toggle-btn');
-  const mobileDrawer = document.querySelector('.mobile-nav-drawer');
-  const drawerOverlay = document.querySelector('.mobile-drawer-overlay');
-  const closeDrawerBtn = document.querySelector('.mobile-drawer-close');
+  if (desktopTopBtn) desktopTopBtn.addEventListener('click', scrollToTop);
+  if (mobileTopBtn) mobileTopBtn.addEventListener('click', scrollToTop);
+
+  // 2. Mobile Drawer Navigation & Accordion Submenus
+  const mobileToggle = document.getElementById('mobileMenuToggle') || document.querySelector('.mobile-toggle-btn');
+  const mobileDrawer = document.getElementById('mobileNavDrawer') || document.querySelector('.mobile-nav-drawer');
+  const drawerOverlay = document.getElementById('mobileDrawerOverlay') || document.querySelector('.mobile-drawer-overlay');
+  const closeDrawerBtn = document.getElementById('mobileDrawerClose') || document.querySelector('.mobile-drawer-close');
 
   function openDrawer() {
     if (mobileDrawer) mobileDrawer.classList.add('active');
@@ -47,6 +61,19 @@ document.addEventListener('DOMContentLoaded', function () {
   if (mobileToggle) mobileToggle.addEventListener('click', openDrawer);
   if (closeDrawerBtn) closeDrawerBtn.addEventListener('click', closeDrawer);
   if (drawerOverlay) drawerOverlay.addEventListener('click', closeDrawer);
+
+  // Accordion submenus in mobile drawer
+  const accordionButtons = document.querySelectorAll('.mobile-accordion-btn');
+  accordionButtons.forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const parentLi = this.closest('.mobile-has-sub');
+      if (parentLi) {
+        parentLi.classList.toggle('open');
+      }
+    });
+  });
 
   // 3. Hero Carousel Slider
   const slides = document.querySelectorAll('.hero-slide');

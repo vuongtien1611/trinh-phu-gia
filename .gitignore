@@ -23,3 +23,8 @@ update_subpages.js
 Thumbs.db
 .vscode/
 .idea/
+
+capture_v5_evidence.js
+fix_duan_thuvien.js
+upgrade_header_floating.js
+
