@@ -1,0 +1,25 @@
+# Node modules
+node_modules/
+
+# Screenshots & evidence images
+evidence-*.png
+screenshot*.png
+shot-*.png
+
+# Temporary execution scripts
+audit_extracted.js
+capture_evidence.js
+capture_v4.js
+clean_duplicate_ctas.js
+finetune_v4.js
+implement_v4_redesign.js
+setup_v2_assets.js
+summarize_pdf.js
+sync_v4_all_pages.js
+update_subpages.js
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
