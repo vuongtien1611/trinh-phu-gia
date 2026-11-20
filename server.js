@@ -2,7 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3030;
 const HOST = '0.0.0.0';
 const ROOT_DIR = __dirname;
 
@@ -61,6 +61,18 @@ const server = http.createServer((req, res) => {
       res.end(content);
     }
   });
+});
+
+process.on('uncaughtException', (err) => {
+  console.error('[SERVER ERROR]', err);
+});
+
+process.on('unhandledRejection', (reason) => {
+  console.error('[SERVER REJECTION]', reason);
+});
+
+server.on('error', (err) => {
+  console.error('[SERVER LISTEN ERROR]', err);
 });
 
 server.listen(PORT, HOST, () => {

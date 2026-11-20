@@ -91,7 +91,7 @@ Trong thư mục dự án, chạy lệnh:
 node server.js
 ```
 Mở trình duyệt truy cập:
-👉 **http://localhost:3000**
+👉 **http://localhost:3030**
 
 ### Cách 2: Mở trực tiếp file HTML
 Có thể click đúp chuột vào file `index.html` để mở trực tiếp trong bất kỳ trình duyệt nào (Chrome, Edge, Firefox).
